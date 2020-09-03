@@ -111,8 +111,7 @@ public class MotelDatos{
     public static ArrayList<Historial> getHistorial(){
         ArrayList historial = new ArrayList();
         CargarConexion con = new CargarConexion();
-        String sql;
-        sql = "SELECT * FROM historial";
+        String sql  = "SELECT * FROM historial";
         
         try {
             Statement st = con.getConexion().createStatement();
@@ -148,9 +147,9 @@ public class MotelDatos{
         CargarConexion cn = new CargarConexion();
         Habitacion habitacion;
         ArrayList<Habitacion> habitaciones = new ArrayList();
-        
+        String sql = "SELECT * FROM habitacion";
+
         try {
-            String sql = "SELECT * FROM habitacion";
             Statement st = cn.getConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
@@ -173,12 +172,30 @@ public class MotelDatos{
         
         return habitaciones;
     }
-    public static Vector titles(){
-        Vector titles = new Vector();
-        titles.add("ID");
-        titles.add("HUESPED");
-        titles.add("FECHA");
-        titles.add("HABITACIÓN");
-        return titles;
+
+    public static ArrayList<String> getTitles(){
+        CargarConexion cn = new CargarConexion();
+        ArrayList<String> titles = new ArrayList();
+
+        String sql = "SELECT * FROM historial LIMIT 1";
+
+        try{
+            Statement st = cn.getConexion().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
+                titles.add(rs.getMetaData().getColumnName(i));
+            }
+
+            return titles;
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
+
+        finally {
+            cn.close();
+        }
     }
 }
