@@ -4,8 +4,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import controller.MotelDatos;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,24 +31,24 @@ public class IndexController implements Initializable {
 
     void chargeTable () {
 
-        TableColumn<String, model.Historial> columna1 = new TableColumn<>("ID");
-        columna1.setCellValueFactory(new PropertyValueFactory<>("idhistorial"));
+        ArrayList<String> encabezados = MotelDatos.getTitles();
 
-        TableColumn<String, model.Historial> columna2 = new TableColumn<>("Huesped");
-        columna2.setCellValueFactory(new PropertyValueFactory<>("huesped"));
+        for (String encabezado : encabezados) {
+            TableColumn<String, model.Historial> columna = new TableColumn<>(encabezado.toUpperCase());
+            columna.setCellValueFactory(new PropertyValueFactory<>(encabezado));
+            tablaHistorial.getColumns().add(columna);
+        }
 
-        TableColumn<String, model.Historial> columna3 = new TableColumn<>("Fecha");
-        columna3.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        ArrayList<Historial> historial = MotelDatos.getHistorial();
 
-        TableColumn<String, model.Historial> columna4 = new TableColumn<>("Habitación");
-        columna4.setCellValueFactory(new PropertyValueFactory<>("habitacion_id"));
-
-        tablaHistorial.getColumns().add(columna1);
-        tablaHistorial.getColumns().add(columna2);
-        tablaHistorial.getColumns().add(columna3);
-        tablaHistorial.getColumns().add(columna4);
-
-        ArrayList<Historial> historial = controller.MotelDatos.getHistorial();
+        if (historial == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Diálogo de información");
+            alert.setHeaderText("Error en la Base datos");
+            alert.setContentText("La base da datos no a retornado información");
+            alert.showAndWait();
+            return;
+        }
 
         for (Object registro : historial) {
             tablaHistorial.getItems().add(registro);
