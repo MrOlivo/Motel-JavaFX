@@ -2,6 +2,22 @@
 
 El siguiente bosquejo de diseño tiene como propósito establecer las condiciones medulares para que **Usted** pueda entender lo que se le solicita en la presente evaluación. Siga las indicaciones que se le indican a continuación.
 
+0.  Requisitos
+
+**Obligatorios**
+
+- [x] MySQL v8.0.21
+- [x] Java v11.0.8
+- [x] JavaFX v14.0.2.1
+- [x] IntelliJ IDEA
+
+*Opcionales*
+
+- [x] MySQLWorkbench
+- [x] Jasper Report
+- [x] MySQL Connector Driver
+- [x] JCalendar v1.4
+
 1.   Crear en MySQL un esquema de base de datos con el nombre de “motel”. En ese esquema se tienen que crear dos tablas. Una se tiene que llamar “habitacion” y la otra “historial”. Las siguientes figuras le servirán para orientarse en la creación del esquema y las dos tablas antes mencionadas.
 
 Nota: Observe que existe una relación entre la tabla habitación e historial.
@@ -36,12 +52,12 @@ CREATE TABLE `historial` (
 ) 
 ```
 
-2. Insertar 14 registros en la tabla habitacion. Los datos puede introducirlos manualmente (o en la forma que Usted guste). Al insertar los registros deberá considerar lo siguiente:
+1. Insertar 14 registros en la tabla habitacion. Los datos puede introducirlos manualmente (o en la forma que Usted guste). Al insertar los registros deberá considerar lo siguiente:
 
    1. El campo **id** almacena el número de habitación. Por tanto, los valores válidos al hacer la captura deben ser en el rango 1...14.
    2. El campo **huesped** corresponde al nombre o alias del huésped. Durante la inserción manual de los 14 registros que se le han solicitado, en vez de capturar el nombre de una persona, deberá capturar “Habitación 1”, “Habitación 2”, “Habitación 3”, y así sucesivamente.
    3. El campo **fecha** corresponde a la fecha en que fue capturada la habitación. Sobre este campo, le sugiero que no le otorgue ningún valor durante la inserción, para que le sea asignada automáticamente la fecha y hora del sistema (tipo de campo timestamp).
-3. Con el IDE Netbeans crear una clase llamada **MotelDatos**. En esta clase Usted deberá escribir el código base que se muestra a continuación, implementar los métodos de la interface y agregar todos los que Usted crea pertinentes.
+2. Con el IDE IntelliJ IDEA crear una clase llamada **MotelDatos**. En esta clase Usted deberá escribir el código base que se muestra a continuación, implementar los métodos de la interface y agregar todos los que Usted crea pertinentes.
 
 ```java
 package motel;
