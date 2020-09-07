@@ -8,6 +8,7 @@ import controller.MotelDatos;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,19 +18,18 @@ public class IndexController implements Initializable {
 
     @FXML
     private ResourceBundle resources;
-
-    @FXML
     private URL location;
 
     @FXML
     private TableView tablaHistorial;
+    public Button btnReporte;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         chargeTable();
     }
 
-    void chargeTable () {
+    public void chargeTable () {
 
         ArrayList<String> encabezados = MotelDatos.getTitles();
 
@@ -54,6 +54,10 @@ public class IndexController implements Initializable {
             tablaHistorial.getItems().add(registro);
         }
 
+    }
+
+    public void generarReporte() {
+        new resources.reportes.MotelReportes().ReporteGeneral();
     }
 
 }
