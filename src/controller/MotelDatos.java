@@ -28,11 +28,13 @@ public class MotelDatos{
     public MotelDatos(){
     }
     
-    public boolean isOcupada(int id){
+    public boolean isOcupada(Habitacion ha){
         boolean flag = false;
         CargarConexion cn = new CargarConexion();
 
         try {
+            int id = ha.getId();
+
             String sql = "SELECT * FROM habitacion WHERE huesped LIKE 'habitacion%' AND idhabitacion=?";
             PreparedStatement ps = cn.getConexion().prepareStatement(sql);
             ps.setInt(1, id);
@@ -69,9 +71,11 @@ public class MotelDatos{
         return true;
     }
     
-    public boolean desocupar(int id) {
+    public boolean desocupar(Habitacion ha) {
         CargarConexion cn = new CargarConexion();
         try {
+            int id = ha.getId();
+
             String sql = "UPDATE habitacion SET huesped=? WHERE idhabitacion=?";
             PreparedStatement ps = cn.getConexion().prepareStatement(sql);
             String a = "Habitacion "+ id;
