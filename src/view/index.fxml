@@ -7,12 +7,12 @@
    <children>
       <SplitPane dividerPositions="0.5" layoutX="200.0" layoutY="120.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" styleClass="bg-blue" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minWidth="225.0" prefHeight="398.0" prefWidth="204.0" styleClass="bg-blue" stylesheets="@style.css">
+          <AnchorPane styleClass="bg-blue" stylesheets="@style.css">
                <children>
                   <Label layoutX="14.0" layoutY="14.0" text="Motel Amado Nervo" textFill="WHITE" />
                </children>
             </AnchorPane>
-          <AnchorPane minWidth="250.0" prefHeight="160.0" prefWidth="100.0" styleClass="bg-white" stylesheets="@style.css">
+          <AnchorPane styleClass="bg-white" stylesheets="@style.css">
                <children>
                   <TableView fx:id="tablaHistorial" layoutY="37.0" prefHeight="347.0" prefWidth="320.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Button fx:id="btnReporte" layoutX="14.0" layoutY="357.0" mnemonicParsing="false" onAction="#generarReporte" styleClass="btn" stylesheets="@style.css" text="Reporte General" />

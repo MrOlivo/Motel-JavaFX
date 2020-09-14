@@ -2,6 +2,7 @@ package view;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import controller.MotelDatos;
@@ -33,25 +34,26 @@ public class IndexController implements Initializable {
 
         ArrayList<String> encabezados = MotelDatos.getTitles();
 
-        for (String encabezado : encabezados) {
-            TableColumn<String, model.Historial> columna = new TableColumn<>(encabezado.toUpperCase());
-            columna.setCellValueFactory(new PropertyValueFactory<>(encabezado));
-            tablaHistorial.getColumns().add(columna);
-        }
+        try{
+            for (String encabezado : encabezados) {
+                TableColumn<String, model.Historial> columna = new TableColumn<>(encabezado.toUpperCase());
+                columna.setCellValueFactory(new PropertyValueFactory<>(encabezado));
+                tablaHistorial.getColumns().add(columna);
+            }
 
-        ArrayList<Historial> historial = MotelDatos.getHistorial();
+            ArrayList<Historial> historial = MotelDatos.getHistorial();
 
-        if (historial == null){
+            for (Object registro : historial) {
+                tablaHistorial.getItems().add(registro);
+            }
+
+        } catch(NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Diálogo de información");
-            alert.setHeaderText("Error en la Base datos");
-            alert.setContentText("La base da datos no a retornado información");
+            alert.setHeaderText("Error");
+            alert.setContentText(e.getMessage());
             alert.showAndWait();
             return;
-        }
-
-        for (Object registro : historial) {
-            tablaHistorial.getItems().add(registro);
         }
 
     }
