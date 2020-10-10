@@ -7,6 +7,8 @@ package resources.reportes;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import model.Connection;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -27,7 +29,7 @@ public class MotelReportes {
         Map params = new HashMap();
         params.put("Parameter1", date);
         try {
-            report = JasperFillManager.fillReport(path, params, new model.CargarConexion().getConexion());
+            report = JasperFillManager.fillReport(path, params, new Connection().getConnection());
             JasperViewer.viewReport(report, false);
         } catch (JRException ex) {
             System.err.println("No se cargo el reporte papu: " + ex.getMessage());
@@ -39,7 +41,7 @@ public class MotelReportes {
         JasperPrint report;
         Map params = new HashMap();
         try {
-            report = JasperFillManager.fillReport(path, params, new model.CargarConexion().getConexion());
+            report = JasperFillManager.fillReport(path, params, new Connection().getConnection());
             JasperViewer.viewReport(report, false);
         } catch (JRException ex) {
             System.err.println("No se cargo el reporte papu: " + ex.getMessage());
@@ -53,7 +55,7 @@ public class MotelReportes {
         params.put("Parameter1", id);
         params.put("Empresa", "UwU Company Inc.");
         try {
-            report = JasperFillManager.fillReport(path, params, new model.CargarConexion().getConexion());
+            report = JasperFillManager.fillReport(path, params, new Connection().getConnection());
             JasperViewer.viewReport(report, false);
         } catch (JRException ex) {
             System.err.println("No se cargo el reporte papu: " + ex.getMessage());
