@@ -12,13 +12,13 @@ import javax.swing.JOptionPane;
  *
  * @author olivo
  */
-public class CargarConexion {
+public class Connection {
 
-    private Connection conn = null;
+    private java.sql.Connection conn = null;
     private final String user = "root";
     private final String pass = "lunanova";
 
-    public CargarConexion() {
+    public Connection() {
         try {
             
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -51,7 +51,7 @@ public class CargarConexion {
         }
     }
 
-    public Connection getConexion() {
+    public java.sql.Connection getConnection() {
         return conn;
     }
 
