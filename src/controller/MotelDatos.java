@@ -5,10 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.CargarConexion;
+import model.Connection;
 import model.Habitacion;
 import model.Historial;
 
@@ -30,13 +29,13 @@ public class MotelDatos{
     
     public boolean isOcupada(Habitacion ha){
         boolean flag = false;
-        CargarConexion cn = new CargarConexion();
+        Connection cn = new Connection();
 
         try {
             int id = ha.getId();
 
             String sql = "SELECT * FROM habitacion WHERE huesped LIKE 'habitacion%' AND idhabitacion=?";
-            PreparedStatement ps = cn.getConexion().prepareStatement(sql);
+            PreparedStatement ps = cn.getConnection().prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             flag = rs.next();
@@ -51,10 +50,10 @@ public class MotelDatos{
     }
     
     public boolean registrar(Habitacion ha) {
-        CargarConexion cn = new CargarConexion();
+        Connection cn = new Connection();
         try {
             String sql = "UPDATE habitacion SET huesped=? WHERE idhabitacion=?";
-            PreparedStatement ps = cn.getConexion().prepareStatement(sql);
+            PreparedStatement ps = cn.getConnection().prepareStatement(sql);
             ps.setString(1, ha.getHuesped());
             ps.setInt(2, ha.getId());
             ps.executeUpdate();
@@ -72,12 +71,12 @@ public class MotelDatos{
     }
     
     public boolean desocupar(Habitacion ha) {
-        CargarConexion cn = new CargarConexion();
+        Connection cn = new Connection();
         try {
             int id = ha.getId();
 
             String sql = "UPDATE habitacion SET huesped=? WHERE idhabitacion=?";
-            PreparedStatement ps = cn.getConexion().prepareStatement(sql);
+            PreparedStatement ps = cn.getConnection().prepareStatement(sql);
             String a = "Habitacion "+ id;
             ps.setString(1, a);
             ps.setInt(2, id);
@@ -95,10 +94,10 @@ public class MotelDatos{
     }
     
     public boolean registrarHistorial(Habitacion ha) {
-        CargarConexion cn = new CargarConexion();
+        Connection cn = new Connection();
         try {
             String sql = "INSERT INTO historial(huesped, habitacion_id) VALUES (?,?)";
-            PreparedStatement ps = cn.getConexion().prepareStatement(sql);
+            PreparedStatement ps = cn.getConnection().prepareStatement(sql);
             ps.setString(1, ha.getHuesped());
             ps.setInt(2, ha.getId());
             return ps.execute();
@@ -114,11 +113,11 @@ public class MotelDatos{
     
     public static ArrayList<Historial> getHistorial(){
         ArrayList historial = new ArrayList();
-        CargarConexion con = new CargarConexion();
+        Connection con = new Connection();
         String sql  = "SELECT * FROM historial";
         
         try {
-            Statement st = con.getConexion().createStatement();
+            Statement st = con.getConnection().createStatement();
             ResultSet rs = st.executeQuery(sql);
             
             Historial registro;
@@ -148,13 +147,13 @@ public class MotelDatos{
     }
     
     public ArrayList<Habitacion> listarHabitaciones(){
-        CargarConexion cn = new CargarConexion();
+        Connection cn = new Connection();
         Habitacion habitacion;
         ArrayList<Habitacion> habitaciones = new ArrayList();
         String sql = "SELECT * FROM habitacion";
 
         try {
-            Statement st = cn.getConexion().createStatement();
+            Statement st = cn.getConnection().createStatement();
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
                 habitacion = new Habitacion();
@@ -178,13 +177,13 @@ public class MotelDatos{
     }
 
     public static ArrayList<String> getTitles(){
-        CargarConexion cn = new CargarConexion();
+        Connection cn = new Connection();
         ArrayList<String> titles = new ArrayList();
 
         String sql = "SELECT * FROM historial LIMIT 1";
 
         try{
-            Statement st = cn.getConexion().createStatement();
+            Statement st = cn.getConnection().createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
